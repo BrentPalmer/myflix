@@ -9,6 +9,7 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'pg'
+gem 'railties', '~> 4.2.0'
 
 group :development do
   gem 'thin'
