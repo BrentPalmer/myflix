@@ -6,4 +6,9 @@ require 'spec_helper'
     it { should validate_presence_of(:title)}
     it { should validate_presence_of(:description)}
 
-end
+    describe "search_by_title" do
+      it "should return nothing"
+      it "should return a single video"
+      it "should return multiple videos"
+    end
+  end
