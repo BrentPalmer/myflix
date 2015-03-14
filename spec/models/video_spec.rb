@@ -7,8 +7,28 @@ require 'spec_helper'
     it { should validate_presence_of(:description)}
 
     describe "search_by_title" do
-      it "should return nothing"
-      it "should return a single video"
-      it "should return multiple videos"
+
+      it "returns empty array if no match" do
+        futurama = Video.create(title:"futurama", description: "space travel")
+        back_to_the_future = Video.create(title:"back_to_the_future", description: "time travel")
+        expect(Video.search_by_title("hello")).to eq([])
+      end
+
+      it "returns an array of one video for an exact match" do
+        futurama = Video.create(title:"futurama", description: "space travel")
+        back_to_the_future = Video.create(title:"back_to_the_future", description: "time travel")
+        expect(Video.search_by_title("futurama")).to eq([futurama])
+      end
+
+      it "reterns an array of one video for a partial match" do
+        futurama = Video.create(title:"futurama", description: "space travel")
+        back_to_the_future = Video.create(title:"back_to_the_future", description: "time travel")
+        expect(Video.search_by_title("urama")).to eq([futurama])
+      end
+      it "returns an array of all matches ordered by created_at" do
+        futurama = Video.create(title:"futurama", description: "space travel", created_at: 1.day.ago)
+        back_to_the_future = Video.create(title:"back_to_the_future", description: "time travel")
+        expect(Video.search_by_title("futur")).to eq([back_to_the_future,futurama])
+      end
     end
   end
