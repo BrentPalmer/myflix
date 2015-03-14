@@ -25,10 +25,18 @@ require 'spec_helper'
         back_to_the_future = Video.create(title:"back_to_the_future", description: "time travel")
         expect(Video.search_by_title("urama")).to eq([futurama])
       end
+
       it "returns an array of all matches ordered by created_at" do
         futurama = Video.create(title:"futurama", description: "space travel", created_at: 1.day.ago)
         back_to_the_future = Video.create(title:"back_to_the_future", description: "time travel")
         expect(Video.search_by_title("futur")).to eq([back_to_the_future,futurama])
       end
+
+      it "returns an empty array for a search with an empty string" do
+        futurama = Video.create(title:"futurama", description: "space travel")
+        back_to_the_future = Video.create(title:"back_to_the_future", description: "time travel")
+        expect(Video.search_by_title("")).to eq([])
+      end
+
     end
   end
