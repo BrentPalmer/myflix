@@ -5,9 +5,9 @@
     %li= link_to "Videos"
     %li= link_to "My Queue"
     %li= link_to "People"
-  = form_tag search_videos_path, class: "span5 for-search" do
-    = text_field_tag (name="search_term" type="text" placeholder="Search for videos here")
-    = submit_tag "Submit", class: "btn btn-success"
+  = form_tag search_videos_path, class: "span5 for-search", method: "get" do
+    = text_field_tag :search_term, nil, placeholder: 'Search for videos here.'
+    = submit_tag "Submit", class: "btn-small btn-success"
   #user_links.pull-right
     %ul
       %li.dropdown
