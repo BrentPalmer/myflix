@@ -1,4 +1,5 @@
 Myflix::Application.routes.draw do
+  root 'videos#index'
   get '/home', to: 'videos#index'
 
   resources :videos do
