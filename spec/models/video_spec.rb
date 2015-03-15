@@ -38,5 +38,11 @@ require 'spec_helper'
         expect(Video.search_by_title("")).to eq([])
       end
 
+      it "returns a array with all matches when lower or upper case string is passed in." do
+        futurama = Video.create(title:"Futurama", description: "space travel", created_at: 1.day.ago)
+        back_to_the_future = Video.create(title:"Back_to_the_future", description: "time travel")
+        expect(Video.search_by_title("futur")).to eq([back_to_the_future,futurama])
+      end
+
     end
   end
