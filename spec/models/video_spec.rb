@@ -43,6 +43,5 @@ require 'spec_helper'
         back_to_the_future = Video.create(title:"Back_to_the_future", description: "time travel")
         expect(Video.search_by_title("futur")).to eq([back_to_the_future,futurama])
       end
-
     end
   end
