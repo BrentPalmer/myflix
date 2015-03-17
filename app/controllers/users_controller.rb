@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:success] = "Your account as been created!"
-      redirect_to videos_path
+      redirect_to login_path
     else
       render :new
     end
