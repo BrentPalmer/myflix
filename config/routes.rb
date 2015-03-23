@@ -13,6 +13,7 @@ Myflix::Application.routes.draw do
 
   resources :categories, only: [:show]
   resources :users, only: [:index, :new, :create]
+  resources :reviews
 
   get 'ui(/:action)', controller: 'ui'
 end
