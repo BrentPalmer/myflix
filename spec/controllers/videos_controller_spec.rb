@@ -22,7 +22,18 @@ describe VideosController do
   end
 
   describe "GET show" do
-    it "sets the @video variable" do
+    it "sets the @video for authenticated users" do
+      user = User.create(name: "Brent", email: "test@test.com", password: "testtest")
+      session[:user_id] = user.id
+
+      video = Fabricate(:video)
+      review1 = Fabricate(:review, video: video)
+      review2 = Fabricate(:review, video: video)
+      get :show, id: video.id
+      expect(assigns(:reviews)).to match_array([review1,review2])
+    end
+
+    it "sets @reviews for authenticated users" do
       user = User.create(name: "Brent", email: "test@test.com", password: "testtest")
       session[:user_id] = user.id
 
