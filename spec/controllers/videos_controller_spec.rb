@@ -65,7 +65,7 @@ describe VideosController do
     it "redirects to front page if user is not authenticated" do
       futurama = Fabricate(:video, title: "futurama")
       post :search, search_term: "fut"
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to login_path
     end
   end
 end
