@@ -3,6 +3,7 @@ require "spec_helper"
 describe VideosController do
 
   describe "GET index" do
+
     it "sets the @categories variable" do
       user = User.create(name: "Brent", email: "test@test.com", password: "testtest")
       session[:user_id] = user.id
@@ -22,6 +23,7 @@ describe VideosController do
   end
 
   describe "GET show" do
+
     it "sets the @video for authenticated users" do
       user = User.create(name: "Brent", email: "test@test.com", password: "testtest")
       session[:user_id] = user.id
@@ -52,13 +54,14 @@ describe VideosController do
     end
   end
 
-  describe "POST search" do
+  describe "GET search" do
+
     it "sets @results for authenticated users" do
       user = User.create(name: "Brent", email: "test@test.com", password: "testtest")
       session[:user_id] = user.id
 
       futurama = Fabricate(:video, title: "futurama")
-      post :search, search_term: "fut"
+      get :search, search_term: "fut"
       expect(assigns(:results)).to eq([futurama])
     end
 
