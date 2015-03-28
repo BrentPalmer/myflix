@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
-  before_action :require_user, only: [:index, :show]
+  before_action :require_user, only: [:index, :show, :search]
 
   def index
     @categories = Category.includes(:videos)
@@ -7,6 +7,7 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
+    @reviews = @video.reviews
   end
 
   def search
