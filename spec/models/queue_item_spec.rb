@@ -27,4 +27,22 @@ describe QueueItem do
       expect(queue_item.rating).to eq(nil)
     end
   end
+
+  describe "#category_name" do
+    it "returns the category's name of the video" do
+      category = Fabricate(:category, name: "Comedies")
+      video = Fabricate(:video, category: category)
+      queue_item = Fabricate(:queue_item, video: video)
+      expect(queue_item.category_name).to eq("Comedies")
+    end
+  end
+
+  describe "#category" do
+    it "returns the category of the video" do
+      category = Fabricate(:category, name: "Comedies")
+      video = Fabricate(:video, category: category)
+      queue_item = Fabricate(:queue_item, video: video)
+      expect(queue_item.category).to eq(category)
+    end
+  end
 end
