@@ -19,7 +19,7 @@ Video.create(title: "South Park", description: "Four boys in a small town get in
 Video.create(title: "Family Guy", description: "Family of five have crazy flashbacks.", small_cover_url: "family_guy.jpg", large_cover_url: "", category_id: 1)
 Video.create(title: "Futurama", description: "Space comedy.", small_cover_url: "futurama.jpg", large_cover_url: "", category_id: 1)
 
-Brent = User.create(name:"Brent", email:"brent@brent.com", password:"password")
+brent = User.create(name:"Brent", email:"brent@brent.com", password:"password")
 
 Review.create(user: Brent, video: south_park, rating: 4, content: "Funny Show!")
 Review.create(user: Brent, video: south_park, rating: 2, content: "Not too Funny Show!")
