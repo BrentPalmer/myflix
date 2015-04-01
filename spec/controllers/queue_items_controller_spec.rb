@@ -47,6 +47,7 @@ describe QueueItemsController do
       post :create, video_id: video.id
       expect(QueueItem.first.user).to eq(alice)
     end
+    
     it "puts the video as the last one in the queue" do
       alice = Fabricate(:user)
       session[:user_id] = alice.id
@@ -72,6 +73,39 @@ describe QueueItemsController do
       Fabricate(:queue_item, video: monk)
       post :create, video_id: monk.id
       expect(response).to redirect_to login_path 
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "redirects to my queue page" do
+      alice = Fabricate(:user)
+      session[:user_id] = alice.id
+      queue_item = Fabricate(:queue_item)
+      delete :destroy, id: queue_item.id
+      expect(response).to redirect_to my_queue_path
+    end
+
+    it "deletes the specified queue item" do
+      alice = Fabricate(:user)
+      session[:user_id] = alice.id
+      queue_item = Fabricate(:queue_item, user: alice)
+      delete :destroy, id: queue_item.id
+      expect(QueueItem.count).to eq(0)
+    end
+
+    it "does not delete the queue item if the queue item is not in current user queue" do
+      alice = Fabricate(:user)
+      bob = Fabricate(:user)
+      session[:user_id] = bob.id
+      queue_item = Fabricate(:queue_item, user: alice)
+      delete :destroy, id: queue_item.id
+      expect(QueueItem.count).to eq(1)
+    end
+
+    it "redirects to the sign in page for unauthenticated users" do
+      queue_item = Fabricate(:queue_item)
+      delete :destroy, id: queue_item.id
+      expect(response).to redirect_to login_path
     end
   end
 end
